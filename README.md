@@ -9,10 +9,10 @@ Project Cardiowave is an innovative web-based application designed to visualize 
 
 ## Features
 
-3D Heart Visualization: Utilizes Three.js for rendering a detailed 3D model of the human heart.
-ECG Data Interpretation: Converts ECG report data into visual movements of the heart model.
-Real-time Interaction: Users can interact with the model, exploring different views and aspects of the heart's movement.
-Responsive Design: The application is designed to be fully responsive, ensuring a seamless experience across various devices.
+-> 3D Heart Visualization: Utilizes Three.js for rendering a detailed 3D model of the human heart.
+-> ECG Data Interpretation: Converts ECG report data into visual movements of the heart model.
+-> Real-time Interaction: Users can interact with the model, exploring different views and aspects of the heart's movement.
+-> Responsive Design: The application is designed to be fully responsive, ensuring a seamless experience across various devices.
 
 
 ## How It Works
