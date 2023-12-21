@@ -21,7 +21,9 @@ Project Cardiowave is an innovative web-based application designed to visualize 
 ## How It Works
 
 Upload ECG Report: Users upload their ECG report through the web interface.
+
 Data Processing: The uploaded ECG data is processed to synchronize with the heart model's movements.
+
 Visualization: The 3D heart model visualizes the pumping action of atria and ventricles based on the processed ECG data.
 
 
