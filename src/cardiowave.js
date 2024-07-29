@@ -12,7 +12,7 @@ var Object5;
 var Object6;
 var data;
 var spotLight;
-// var heartParts = [];
+
 
 window.onload = function () {
   // Three.js code goes here
@@ -51,17 +51,6 @@ window.onload = function () {
   scene.add(spotLight);
   scene.add(spotLight.target);
 
-  //Grid helper
-  // const size = 200;
-  // const divisions = 100;
-  // const gridHelper = new THREE.GridHelper( size, divisions );
-  // scene.add( gridHelper );
-
-  // //Axes helper
-  // const axesHelper = new THREE.AxesHelper( 200 );
-  // axesHelper.setColors('red', 'blue', 'green')
-  // scene.add( axesHelper );
-
   // Load gltf file
   var loader = new GLTFLoader();
   loader.load("heart.glb", function (gltf) {
@@ -85,6 +74,7 @@ window.onload = function () {
       }
     });
 
+    // Adds the heart model to the scene.
     scene.add(gltf.scene);
 
     Object1 = gltf.scene.getObjectByName("RIGHT_ATRIUM");
@@ -137,99 +127,6 @@ window.onload = function () {
     });
   });
 
-  //display the 6 meshes atrium
-  // var loader = new GLTFLoader();
-  // loader.load(
-  //   "heart.glb",
-  //   function (gltf) {
-
-
-  //     Object1 = gltf.scene.getObjectByName("RIGHT_ATRIUM");
-  //     Object1.scale.x = 0.5;
-  //     Object1.scale.y = 0.5;
-  //     Object1.scale.z = 0.5;
-
-  //     Object1.material = new THREE.MeshStandardMaterial({
-  //       color: 0x355070,
-  //     });
-
-  //     Object2 = gltf.scene.getObjectByName("LEFT_ATRIUM");
-  //     Object2.scale.x = 0.5;
-  //     Object2.scale.y = 0.5;
-  //     Object2.scale.z = 0.5;
-  //     Object2.material = new THREE.MeshStandardMaterial({
-  //       color: 0x6d597a,
-  //     });
-
-  //     Object3 = gltf.scene.getObjectByName("RIGHT_VENTRICLE");
-  //     Object3.scale.x = 0.5;
-  //     Object3.scale.y = 0.5;
-  //     Object3.scale.z = 0.5;
-  //     Object3.material = new THREE.MeshStandardMaterial({
-  //       color: 0xb56576,
-  //     });
-
-  //     Object4 = gltf.scene.getObjectByName("LEFT_VENTRICLE");
-  //     Object4.scale.x = 0.5;
-  //     Object4.scale.y = 0.5;
-  //     Object4.scale.z = 0.5;
-  //     Object4.material = new THREE.MeshStandardMaterial({
-  //       color: 0xe56b6f,
-  //     });
-
-  //     Object5 = gltf.scene.getObjectByName("AORTA");
-  //     Object5.scale.x = 0.5;
-  //     Object5.scale.y = 0.5;
-  //     Object5.scale.z = 0.5;
-  //     Object5.material = new THREE.MeshStandardMaterial({
-  //       color: 0xeaac8b,
-  //     });
-
-  //     Object6 = gltf.scene.getObjectByName("PULMONARY_ARTERY");
-  //     Object6.scale.x = 0.5;
-  //     Object6.scale.y = 0.5;
-  //     Object6.scale.z = 0.5;
-  //     Object6.material = new THREE.MeshStandardMaterial({
-  //       color: 0xb5e48c,
-  //     });
-
-  //     // heartParts.push(Object1, Object2, Object3, Object4, Object5, Object6);
-
-  //     Object1.visible = true;
-  //     Object2.visible = true;
-  //     Object3.visible = true;
-  //     Object4.visible = true;
-  //     Object5.visible = true;
-  //     Object6.visible = true;
-
-  //     scene.add(Object1);
-  //     scene.add(Object2);
-  //     scene.add(Object3);
-  //     scene.add(Object4);
-  //     scene.add(Object5);
-  //     scene.add(Object6);
-
-  //     // Rotate the model to be upright on the Y-axis for heart model
-  //     // gltf.scene.rotation.x = -Math.PI / 2;
-  //     // console.log(gltf.scene.rotation.x)
-
-  //     // Iterate over all children of the loaded model
-  //     gltf.scene.traverse(function (child) {
-  //       if (child.isMesh) {
-  //         // Adjust the rotation of the mesh
-  //         child.rotation.x = -Math.PI / 2; // Rotate 90 degrees around the X-axis
-  //         // You may also need to adjust the position of each part after rotation
-  //         // child.position.set(newX, newY, newZ);
-  //       }
-  //     });
-
-  //   },
-  //   undefined,
-  //   function (error) {
-  //     console.error("An error happened during loading the model", error);
-  //   }
-  // );
-
   // getECGfromUrl();
   getECGfromFile();
 
@@ -238,38 +135,7 @@ window.onload = function () {
   animate();
 };
 
-function getECGfromUrl() {
-  // URL of the ECG data file
-  const ecgDataURL = "https://cs666.org/data/ecg.txt";
 
-  // Function to fetch and return the content of the ECG data file
-  async function fetchECGData(url) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      data = await response.text();
-      console.log(data)
-      return data;
-    } catch (error) {
-      console.error("Could not fetch the ECG data:", error);
-    }
-  }
-  // Example usage of the function
-  fetchECGData(ecgDataURL).then((data) => {
-    if (data) {
-      // console.log("ECG File Content:", data);
-
-      // You can now process the `data` string as needed
-      const { metadata, ecgValues } = parseECGData(data);
-      console.log(metadata); // Logs the metadata object
-      console.log(ecgValues); // Logs the array of ECG values
-
-      filterData(ecgValues);
-    }
-  });
-}
 
 function getECGfromFile() {
   document
@@ -280,7 +146,7 @@ function getECGfromFile() {
         const reader = new FileReader();
         reader.onload = function (e) {
           const data = e.target.result;
-          console.log(data)
+          // console.log(data)
           // You can now process the `data` string as needed
           const { metadata, ecgValues } = parseECGData(data);
           console.log(metadata); // Logs the metadata object
@@ -289,7 +155,7 @@ function getECGfromFile() {
         };
         reader.readAsText(file);
       }
-      
+
     });
 
 }
@@ -313,19 +179,6 @@ function parseECGData(content) {
   });
 
   return { metadata, ecgValues };
-}
-
-function convertStringToArray(data) {
-  //convert string data into array
-
-  const ecgValuesArray = data
-    .split("\n")
-    .filter((line) => line && !line.startsWith("#"))
-    .map((line) => parseFloat(line.trim()));
-
-  console.log(ecgValuesArray);
-
-  filterData();
 }
 
 function filterData(ecgValues) {
@@ -377,6 +230,7 @@ function getPeaks(filteredEcgData) {
     // Sort to get the highest peak
     peaks.sort((a, b) => b.value - a.value);
     return peaks.length > 0 ? peaks[0].index : -1; // return highest peak index or -1 if none
+
   }
 
   function detectPeaks(data) {
